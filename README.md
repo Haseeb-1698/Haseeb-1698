@@ -19,10 +19,10 @@
 
 
   <p align="center">
-    <img src="https://github-readme-stats.vercel.app/api?username=Haseeb-1698&bg_color=000000&text_color=FFFFFF&icon_color=FFFFFF&hide_border=true&count_private=true&custom_title=My%20GitHub%20Stats" alt="GitHub Stats" width="460" height="180"/>
+    <img src="https://github-readme-stats.vercel.app/api?username=Haseeb-1698&bg_color=000000&text_color=FFFFFF&icon_color=FFFFFF&hide_border=true&count_private=true&custom_title=My%20GitHub%20Stats" alt="GitHub Stats" width="420" height="180"/>
 
     
-<img src="https://streak-stats.demolab.com/?user=Haseeb-1698&theme=dark&background=000000&stroke=FFFFFF&ring=1E90FF&fire=FFFFFF&currStreakNum=FFFFFF&sideNums=FFFFFF&currStreakLabel=FFFFFF&sideLabels=FFFFFF&dates=FFFFFF&hide_border=true&card_width=500&card_height=180&mode=weekly" alt="GitHub Streak Stats" width="450" height="180"/>
+<img src="https://streak-stats.demolab.com/?user=Haseeb-1698&theme=dark&background=000000&stroke=FFFFFF&ring=1E90FF&fire=FFFFFF&currStreakNum=FFFFFF&sideNums=FFFFFF&currStreakLabel=FFFFFF&sideLabels=FFFFFF&dates=FFFFFF&hide_border=true&card_width=500&card_height=180&mode=weekly" alt="GitHub Streak Stats" width="420" height="180"/>
     
 </p>
 <h3>
