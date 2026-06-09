@@ -20,7 +20,7 @@ jobs:
           base: achievements
           plugin_achievements: yes
           plugin_achievements_threshold: B      # Display achievements with rank B or higher
-          plugin_achievements_secrets: yes      # Display unlocked secrets achievements
+          plugin_achievements_secrets: no       # Disabled: triggers deprecated Projects-classic GraphQL error
           plugin_achievements_display: compact  # Use compact display
           plugin_achievements_limit: 0          # Display all unlocked achievements (no limit)
 
@@ -91,7 +91,7 @@ jobs:
           plugin_habits: yes
           plugin_habits_from: 200       # Use 200 events to compute habits
           plugin_habits_days: 14        # Keep only events from last 14 days
-          plugin_habits_charts: yes     # Display charts section
+          plugin_habits_charts: no      # Disabled: charts path hits upstream "author undefined" crash
           plugin_habits_trim: yes       # Trim unused hours on daily chart
 
   issue_pr_lang:
