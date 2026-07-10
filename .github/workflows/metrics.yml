@@ -100,7 +100,7 @@ jobs:
           base: ""
           config_timezone: Asia/Karachi
           plugin_followup: yes
-          plugin_followup_sections: repositories, user
+          plugin_followup_sections: user
           plugin_languages: yes
 
       - name: Repositories
