@@ -25,12 +25,26 @@ jobs:
   metrics:
     runs-on: ubuntu-latest
     steps:
+      - name: Check metrics token
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          if [ -z "$METRICS_TOKEN" ]; then
+            echo "::error::Create a repository secret named METRICS_TOKEN with a valid GitHub PAT. The built-in github.token is repository-scoped and produces incomplete profile metrics."
+            exit 1
+          fi
+          curl -fsS -H "Authorization: Bearer $METRICS_TOKEN" https://api.github.com/user > /dev/null || {
+            echo "::error::METRICS_TOKEN is invalid or expired. Replace it with a valid GitHub PAT."
+            exit 1
+          }
+
       - name: Header
         uses: lowlighter/metrics@latest
         with:
           filename: header.svg
-          token: ${{ github.token }}
-          # GITHUB_TOKEN is a special auto-generated token used for commits
+          # METRICS_TOKEN is used to collect account-wide data.
+          token: ${{ secrets.METRICS_TOKEN }}
+          # GITHUB_TOKEN is only used to commit generated SVGs to this repository.
           committer_token: ${{ github.token }}
 
           # Options
@@ -43,8 +57,9 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: acti_comm.svg
-          token: ${{ github.token }}
-          # GITHUB_TOKEN is a special auto-generated token used for commits
+          # METRICS_TOKEN is used to collect account-wide data.
+          token: ${{ secrets.METRICS_TOKEN }}
+          # GITHUB_TOKEN is only used to commit generated SVGs to this repository.
           committer_token: ${{ github.token }}
 
           # Options
@@ -57,8 +72,9 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: iso_calender.svg
-          token: ${{ github.token }}
-          # GITHUB_TOKEN is a special auto-generated token used for commits
+          # METRICS_TOKEN is used to collect account-wide data.
+          token: ${{ secrets.METRICS_TOKEN }}
+          # GITHUB_TOKEN is only used to commit generated SVGs to this repository.
           committer_token: ${{ github.token }}
 
           # Options
@@ -73,8 +89,9 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: issue_pr_lang.svg
-          token: ${{ github.token }}
-          # GITHUB_TOKEN is a special auto-generated token used for commits
+          # METRICS_TOKEN is used to collect account-wide data.
+          token: ${{ secrets.METRICS_TOKEN }}
+          # GITHUB_TOKEN is only used to commit generated SVGs to this repository.
           committer_token: ${{ github.token }}
 
           # Options
@@ -89,8 +106,9 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: repositories.svg
-          token: ${{ github.token }}
-          # GITHUB_TOKEN is a special auto-generated token used for commits
+          # METRICS_TOKEN is used to collect account-wide data.
+          token: ${{ secrets.METRICS_TOKEN }}
+          # GITHUB_TOKEN is only used to commit generated SVGs to this repository.
           committer_token: ${{ github.token }}
 
           # Options
