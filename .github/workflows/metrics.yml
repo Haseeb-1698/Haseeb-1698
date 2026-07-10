@@ -6,20 +6,28 @@ on:
   workflow_dispatch:
   push: {branches: ["main"]}
 
+permissions:
+  contents: write
+
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
 
   # NOTE: achievements & habits are generated ONCE as static SVGs (real data),
-  # committed directly, and intentionally NOT regenerated here — the lowlighter
+  # committed directly, and intentionally NOT regenerated here - the lowlighter
   # plugins crash for this account (deprecated Projects-classic API / habits bug).
 
-  github-metrics:
+  metrics:
     runs-on: ubuntu-latest
     steps:
-      - uses: lowlighter/metrics@latest
+      - name: Header
+        uses: lowlighter/metrics@latest
         with:
           filename: header.svg
-          # You'll need to setup a personal token in your secrets.
-          token: ${{ secrets.METRICS_SECRET }}
+          # Prefer the PAT when configured, otherwise use the workflow token.
+          token: ${{ secrets.METRICS_SECRET || secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token used for commits
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -27,15 +35,14 @@ jobs:
           user: Haseeb-1698
           template: classic
           base: header
-          config_timezone: ${{ secrets.USER_TIMEZONE }}
-  acti_comm:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: lowlighter/metrics@latest
+          config_timezone: Asia/Karachi
+
+      - name: Activity and community
+        uses: lowlighter/metrics@latest
         with:
           filename: acti_comm.svg
-          # You'll need to setup a personal token in your secrets.
-          token: ${{ secrets.METRICS_SECRET }}
+          # Prefer the PAT when configured, otherwise use the workflow token.
+          token: ${{ secrets.METRICS_SECRET || secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token used for commits
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -43,16 +50,14 @@ jobs:
           user: Haseeb-1698
           template: classic
           base: activity, community
-          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          config_timezone: Asia/Karachi
 
-  iso_calender:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: lowlighter/metrics@latest
+      - name: ISO calendar
+        uses: lowlighter/metrics@latest
         with:
           filename: iso_calender.svg
-          # You'll need to setup a personal token in your secrets.
-          token: ${{ secrets.METRICS_SECRET }}
+          # Prefer the PAT when configured, otherwise use the workflow token.
+          token: ${{ secrets.METRICS_SECRET || secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token used for commits
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,18 +65,16 @@ jobs:
           user: Haseeb-1698
           template: classic
           base: ""
-          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          config_timezone: Asia/Karachi
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
 
-  issue_pr_lang:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: lowlighter/metrics@latest
+      - name: Issues, pull requests, and languages
+        uses: lowlighter/metrics@latest
         with:
           filename: issue_pr_lang.svg
-          # You'll need to setup a personal token in your secrets.
-          token: ${{ secrets.METRICS_SECRET }}
+          # Prefer the PAT when configured, otherwise use the workflow token.
+          token: ${{ secrets.METRICS_SECRET || secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token used for commits
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -79,19 +82,16 @@ jobs:
           user: Haseeb-1698
           template: classic
           base: ""
-          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          config_timezone: Asia/Karachi
           plugin_followup: yes
           plugin_languages: yes
 
-
-  repositories:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: lowlighter/metrics@latest
+      - name: Repositories
+        uses: lowlighter/metrics@latest
         with:
           filename: repositories.svg
-          # You'll need to setup a personal token in your secrets.
-          token: ${{ secrets.METRICS_SECRET }}
+          # Prefer the PAT when configured, otherwise use the workflow token.
+          token: ${{ secrets.METRICS_SECRET || secrets.GITHUB_TOKEN }}
           # GITHUB_TOKEN is a special auto-generated token used for commits
           committer_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,4 +99,4 @@ jobs:
           user: Haseeb-1698
           template: classic
           base: repositories
-          config_timezone: ${{ secrets.USER_TIMEZONE }}
+          config_timezone: Asia/Karachi
